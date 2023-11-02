@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  api:
+    build: ./foraged-assesment-cra-nodejs/backend 
+    ports: 
+      - '4400:4400'
+    volumes:
+      - ./foraged-assesment-cra-nodejs/backend:/app
+      - /app/node_modules
+  cra:
+    build: ./foraged-assesment-cra-nodejs/frontend 
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./foraged-assesment-cra-nodejs/frontend:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
+  nextjs: 
+    build: ./foraged-assesment-nextjs
+    ports:
+      - '3002:3002'
+    volumes:
+      - ./foraged-assesment-nextjs:/app
+      - /app/node_modules
+    stdin_open: true
+    tty: true
