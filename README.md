@@ -7,4 +7,12 @@ Two apps doing the same thing, one in react/express and the other in Nextjs. The
 cd streak-counter
 docker compose up
 ```
+
+#### Without Docker
+``` 
+cd streak-counter/foraged-assesment-nextjs
+npm install
+npm run dev
+```
+
 NextJS app will be running on port 3002, Plain React app will be running on 3000. Express app endpoint is at 4400/streak
