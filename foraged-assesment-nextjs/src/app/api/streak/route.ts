@@ -36,13 +36,12 @@ export async function POST(req: NextApiRequest) {
       }
       if (isEven(message[i])) {
         evenScore++;
-        streaks.push(oddScore);
         oddScore = 0;
       } else if (!isEven(message[i])) {
         oddScore++;
-        streaks.push(evenScore);
         evenScore = 0;
       }
+      streaks.push(evenScore, oddScore)
     }
     return Math.max(...streaks).toString();
   }

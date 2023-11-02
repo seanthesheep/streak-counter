@@ -32,13 +32,12 @@ app.post('/streak', (req, res) => {
       }
       if (isEven(message[i])) {
         evenScore++;
-        streaks.push(oddScore);
         oddScore = 0;
       } else {
         oddScore++;
-        streaks.push(evenScore);
         evenScore = 0;
       }
+      streaks.push(evenScore, oddScore)
     }
     return Math.max(...streaks).toString();
   }
