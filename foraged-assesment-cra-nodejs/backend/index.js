@@ -13,11 +13,13 @@ app.post('/streak', (req, res) => {
     const letterIndex = alphabet.indexOf(letter);
     return (letterIndex + 1) % 2 === 0;
   }
+
   function isNonAlpha(char) {
     const charCode = char.charCodeAt(0)
     return ((charCode < 65 || charCode > 90)
       && (charCode < 97 || charCode > 122))
   }
+
   function findStreak(message) {
     let evenScore = 0;
     let oddScore = 0;
@@ -32,7 +34,7 @@ app.post('/streak', (req, res) => {
         evenScore++;
         streaks.push(oddScore);
         oddScore = 0;
-      } else if (!isEven(message[i])) {
+      } else {
         oddScore++;
         streaks.push(evenScore);
         evenScore = 0;
@@ -48,6 +50,7 @@ app.post('/streak', (req, res) => {
 
   res.send(findStreak(formattedMessage))
 })
+
 app.listen(port, () => {
   console.log(`listening on port ${port}`)
 })

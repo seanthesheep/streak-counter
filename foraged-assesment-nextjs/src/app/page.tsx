@@ -1,15 +1,15 @@
 "use client"
 import { useState, useEffect } from 'react';
 export default function Home() {
-  const [message, setMessage] = useState<string>("0");
+  const [message, setMessage] = useState<string>("");
   const [streak, setStreak] = useState<string>("0");
   const [loading, setLoading] = useState<boolean>(false);
-
 
   const updateStreak = async () => {
     const requestBody = {
       message: message
     }
+
     if (message.length) {
       try {
         const response = await fetch("api/streak", {
@@ -21,7 +21,6 @@ export default function Home() {
           body: JSON.stringify(requestBody)
         })
         const streak = await response.json();
-        console.log(streak)
         setLoading(false)
         setStreak(streak)
       } catch (error) {
@@ -36,7 +35,6 @@ export default function Home() {
     }, 1000);
     return () => clearTimeout(debounce);
   }, [message, updateStreak])
-
 
   const handleStreak = (e: any) => {
     e.preventDefault();

@@ -2,14 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 
 function App() {
-  const [message, setMessage] = useState<string>("0");
+  const [message, setMessage] = useState<string>("");
   const [streak, setStreak] = useState<string>("0");
-
 
   const updateStreak = useCallback(async () => {
     const requestBody = {
       message: message
     }
+
     if (message.length) {
       try {
         const response = await fetch("http://localhost:4400/streak", {
@@ -21,13 +21,13 @@ function App() {
           body: JSON.stringify(requestBody)
         })
         const streak = await response.json();
-        console.log(streak)
         setStreak(streak)
       } catch (error) {
         console.log(error)
       }
     }
   }, [message])
+
   useEffect(() => {
     const debounce = setTimeout(() => {
       updateStreak()
@@ -35,11 +35,11 @@ function App() {
     return () => clearTimeout(debounce);
   }, [message, updateStreak])
 
-
   const handleStreak = (e: any) => {
     e.preventDefault();
     setMessage(e.target.value)
   }
+
   return (
     <div className="App">
       <h1>Even and Odd Streak</h1>
